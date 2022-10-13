@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     public UserEntity addUser(UserEntity userEntity);
     public UserEntity updateUser(UserEntity userEntity);
+
+    UserEntity findByID(Long userId);
 }

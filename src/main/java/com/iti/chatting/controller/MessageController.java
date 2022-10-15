@@ -1,5 +1,7 @@
 package com.iti.chatting.controller;
 
+import com.iti.chatting.Mapper.MessageMapper;
+import com.iti.chatting.dto.MessageRequestDto;
 import com.iti.chatting.model.ChatEntity;
 import com.iti.chatting.model.MessageEntity;
 import com.iti.chatting.model.UserEntity;
@@ -25,12 +27,12 @@ public class MessageController {
 
 
     @PostMapping("/message/add")
-    public ResponseEntity addMessageByUserToChat(@RequestBody MessageEntity message,Long userId,Long chatId){
+    public ResponseEntity addMessageByUserToChat(@RequestBody MessageRequestDto requestDto, Long userId, Long chatId){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatId);
-
         if(!chat.isPresent()) return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         else{
+            MessageEntity message = MessageMapper.fromMessageRequestToMessageEntity(requestDto);
             ChatEntity chatEntity = chat.get();
             message.setChat(chatEntity);
             message.setUser(user);

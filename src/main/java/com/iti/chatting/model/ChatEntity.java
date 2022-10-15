@@ -25,4 +25,7 @@ public class ChatEntity {
     inverseJoinColumns = {@JoinColumn(name = "user_chat_user_id")})
     List<UserEntity> user;
 
+    @OneToMany(mappedBy = "chat")
+    private List<MessageEntity> messages;
+
 }

@@ -24,7 +24,7 @@ public class MessageController {
     private ChatServiceImpl chatService;
 
 
-    @PostMapping
+    @PostMapping("/message/add")
     public ResponseEntity addMessageByUserToChat(@RequestBody MessageEntity message,Long userId,Long chatId){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatId);

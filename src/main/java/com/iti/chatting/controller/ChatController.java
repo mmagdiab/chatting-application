@@ -1,5 +1,7 @@
 package com.iti.chatting.controller;
 
+import com.iti.chatting.Mapper.ChatMapper;
+import com.iti.chatting.dto.ChatRequestDto;
 import com.iti.chatting.model.ChatEntity;
 import com.iti.chatting.model.UserEntity;
 import com.iti.chatting.service.Impl.ChatServiceImpl;
@@ -25,8 +27,8 @@ public class ChatController {
     }
 
     @PostMapping("/chat/add")
-    public ResponseEntity addChat(@RequestBody ChatEntity entity){
-        return new ResponseEntity(chatService.addChat(entity), HttpStatus.OK);
+    public ResponseEntity addChat(@RequestBody ChatRequestDto requestDto){
+        return new ResponseEntity(ChatMapper.fromChatEntityToChatResponse(chatService.addChat(ChatMapper.fromChatRequestToChatEntity(requestDto))), HttpStatus.OK);
 
     }
 
@@ -38,7 +40,7 @@ public class ChatController {
         else {
             chat.get().getUser().add(user);
             ChatEntity response = chatService.addChat(chat.get());
-            return new ResponseEntity(response,HttpStatus.OK);
+            return new ResponseEntity(ChatMapper.fromChatEntityToChatResponse(response),HttpStatus.OK);
         }
     }
 }

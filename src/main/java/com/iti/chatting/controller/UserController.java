@@ -1,5 +1,7 @@
 package com.iti.chatting.controller;
 
+import com.iti.chatting.Mapper.UserMapper;
+import com.iti.chatting.dto.UserRequestDto;
 import com.iti.chatting.model.UserEntity;
 import com.iti.chatting.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -20,12 +22,12 @@ public class UserController {
 
 
     @PostMapping("/user/add")
-    public ResponseEntity addUser(@RequestBody UserEntity userEntity) {
-        return ResponseEntity.ok().body(userService.addUser(userEntity));
+    public ResponseEntity addUser(@RequestBody UserRequestDto requestDto) {
+        return ResponseEntity.ok().body(UserMapper.fromUserEntityToUserResponse(userService.addUser(UserMapper.fromUserRequestToUserEntity(requestDto))));
     }
 
     @PutMapping("/user/update")
-    public ResponseEntity updatrUser(@RequestBody UserEntity userEntity) {
-        return ResponseEntity.ok().body(userService.updateUser(userEntity));
+    public ResponseEntity updatrUser(@RequestBody UserRequestDto requestDto) {
+        return ResponseEntity.ok().body(UserMapper.fromUserEntityToUserResponse(userService.updateUser(UserMapper.fromUserRequestToUserEntity(requestDto))));
     }
 }

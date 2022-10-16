@@ -1,6 +1,8 @@
 package com.iti.chatting.model;
 
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS")
@@ -10,6 +12,9 @@ public class UserEntity {
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "user")
+    private List<MessageEntity> messages;
 
     public UserEntity() {
     }

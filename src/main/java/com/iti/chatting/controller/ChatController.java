@@ -32,7 +32,7 @@ public class ChatController {
 
     }
 
-    @GetMapping("/chat/adduser")
+    @PostMapping("/chat/adduser")
     public ResponseEntity addUserToChat(@RequestBody Long userId,@RequestBody Long chatID){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatID);

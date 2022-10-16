@@ -31,4 +31,12 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
         return userEntity;
     }
+
+    @Override
+    public UserEntity findByID(Long userId) {
+        if (userRepository.existsById(userId)) {
+            return userRepository.findById(userId).get();
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not found!");
+    }
 }

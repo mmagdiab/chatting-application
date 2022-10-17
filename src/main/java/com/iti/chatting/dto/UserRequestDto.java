@@ -7,4 +7,5 @@ import lombok.Data;
 @Builder
 public class UserRequestDto {
     private String name;
+    private String password;
 }

@@ -27,7 +27,8 @@ public class UserController {
     }
 
     @PutMapping("/user/update")
-    public ResponseEntity updatrUser(@RequestBody UserRequestDto requestDto) {
-        return ResponseEntity.ok().body(UserMapper.fromUserEntityToUserResponse(userService.updateUser(UserMapper.fromUserRequestToUserEntity(requestDto))));
+    public ResponseEntity updateUser(@RequestBody UserEntity userEntity) {
+        // TODO: UPDATE WITH A PROPER MAPPER
+        return ResponseEntity.ok().body(userService.updateUser(userEntity));
     }
 }

@@ -13,6 +13,6 @@ public class MessageMapper {
     }
 
     public static MessageResponseDto fromMessageEntityToMessageResponse(MessageEntity entity){
-        return MessageResponseDto.builder().chatTopic(entity.getChat().getTopic()).userName(entity.getUser().getName()).text(entity.getText()).build();
+        return MessageResponseDto.builder().chatTopic(entity.getChat().getTopic()).userName(entity.getUser().getUsername()).text(entity.getText()).build();
     }
 }

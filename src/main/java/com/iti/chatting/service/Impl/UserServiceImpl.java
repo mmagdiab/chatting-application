@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsById(userId)) {
             return userRepository.findById(userId).get();
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not found!");
+        throw new UsernameNotFoundException("User Not Found");
     }
 
     @Override

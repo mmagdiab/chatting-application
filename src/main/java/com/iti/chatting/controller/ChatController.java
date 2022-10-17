@@ -8,10 +8,8 @@ import com.iti.chatting.service.Impl.ChatServiceImpl;
 import com.iti.chatting.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Optional;
 
 @RestController
@@ -26,14 +24,14 @@ public class ChatController {
         this.userService = userService;
     }
 
-    @PostMapping("/chat/add")
+    @PostMapping("/chats")
     public ResponseEntity addChat(@RequestBody ChatRequestDto requestDto){
         return new ResponseEntity(ChatMapper.fromChatEntityToChatResponse(chatService.addChat(ChatMapper.fromChatRequestToChatEntity(requestDto))), HttpStatus.OK);
 
     }
 
-    @PostMapping("/chat/adduser")
-    public ResponseEntity addUserToChat(@RequestBody Long userId,@RequestBody Long chatID){
+    @PostMapping("/chats/{chatid}/user/{userid}")
+    public ResponseEntity addUserToChat(@PathVariable Long userId, @PathVariable Long chatID){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatID);
         if(!chat.isPresent()) return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);

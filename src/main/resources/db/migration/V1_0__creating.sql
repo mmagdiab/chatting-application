@@ -1,4 +1,4 @@
-CREATE TABLE user
+CREATE TABLE users
 (
     user_id bigint,
     user_login VARCHAR(255),
@@ -6,7 +6,8 @@ CREATE TABLE user
     user_email VARCHAR(400),
     PRIMARY KEY (user_id)
 );
-
+create table hibernate_sequence (next_val bigint);
+insert into hibernate_sequence values ( 1 );
 CREATE TABLE message
 (
     message_id bigint,
@@ -33,11 +34,11 @@ CREATE TABLE chat
     PRIMARY KEY (chat_id)
 );
 
-CREATE INDEX user_login_idx ON user (user_login);
+CREATE INDEX user_login_idx ON users (user_login);
 ALTER TABLE message ADD FOREIGN KEY message_chat_id_idxfk (message_chat_id) REFERENCES chat (chat_id);
 
-ALTER TABLE message ADD FOREIGN KEY message_user_id_idxfk (message_user_id) REFERENCES user (user_id);
+ALTER TABLE message ADD FOREIGN KEY message_user_id_idxfk (message_user_id) REFERENCES users (user_id);
 
-ALTER TABLE user_chat ADD FOREIGN KEY user_chat_user_id_idxfk (user_chat_user_id) REFERENCES user (user_id);
+ALTER TABLE user_chat ADD FOREIGN KEY user_chat_user_id_idxfk (user_chat_user_id) REFERENCES users (user_id);
 
 ALTER TABLE chat ADD FOREIGN KEY chat_id_idxfk (chat_id,user_chat_user_id) REFERENCES user_chat (user_chat_chat_id,user_chat_user_id);

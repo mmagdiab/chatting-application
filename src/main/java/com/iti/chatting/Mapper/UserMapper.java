@@ -8,12 +8,13 @@ public class UserMapper {
 
     public static UserEntity fromUserRequestToUserEntity(UserRequestDto requestDto){
         UserEntity entity = new UserEntity();
-        entity.setName(requestDto.getName());
+        entity.setUsername(requestDto.getName());
+        entity.setPassword(requestDto.getPassword());
         return entity;
     }
 
     public static UserResponseDto fromUserEntityToUserResponse(UserEntity entity){
-        return UserResponseDto.builder().name(entity.getName()).build();
+        return UserResponseDto.builder().name(entity.getUsername()).build();
     }
 
 }

@@ -6,10 +6,13 @@ import com.iti.chatting.model.UserEntity;
 import com.iti.chatting.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 public class UserController {
@@ -21,12 +24,12 @@ public class UserController {
     }
 
 
-    @PostMapping("/user/add")
-    public ResponseEntity addUser(@RequestBody UserRequestDto requestDto) {
+    @PostMapping("/users")
+    public ResponseEntity addUser(@RequestBody @Valid UserRequestDto requestDto) {
         return ResponseEntity.ok().body(UserMapper.fromUserEntityToUserResponse(userService.addUser(UserMapper.fromUserRequestToUserEntity(requestDto))));
     }
 
-    @PutMapping("/user/update")
+    @PutMapping("/users")
     public ResponseEntity updateUser(@RequestBody UserEntity userEntity) {
         // TODO: UPDATE WITH A PROPER MAPPER
         return ResponseEntity.ok().body(userService.updateUser(userEntity));

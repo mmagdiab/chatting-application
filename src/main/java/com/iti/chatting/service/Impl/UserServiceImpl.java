@@ -22,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     private BCryptPasswordEncoder bcryptPasswordEncoder;
 
+    @Autowired
+    private RabbitMqAdmin rabbitMqAdmin;
+
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;
@@ -29,16 +32,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserEntity addUser(UserEntity userEntity) {
-        if (userEntity != null) {
-            userEntity.setPassword(bcryptPasswordEncoder.encode(userEntity.getPassword()));
-            return userRepository.save(userEntity);
-        }
-        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters not provided correctly!");
+        if (userEntity == null)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters not provided correctly!");
+
+        userEntity.setPassword(bcryptPasswordEncoder.encode(userEntity.getPassword()));
+        rabbitMqAdmin.createUserQueue(userEntity.getUsername());
+        return userRepository.save(userEntity);
     }
 
     @Override
     public UserEntity updateUser(UserEntity userEntity) {
-        // TODO: UPDATE WITH A PROPER UPDATING LOGIC
         if (!userRepository.existsById(userEntity.getId())) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User Not found!");
         }

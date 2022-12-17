@@ -31,14 +31,17 @@ public class ChatController {
     }
 
     @PostMapping("/chats/{chatid}/user/{userid}")
-    public ResponseEntity addUserToChat(@PathVariable Long userId, @PathVariable Long chatID){
+    public ResponseEntity addUserToChat(@PathVariable(name = "userid") Long userId, @PathVariable(name = "chatid") Long chatID){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatID);
         if(!chat.isPresent()) return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
-        else {
+
+        ChatEntity response = chatService.addUserToChat(user, chat.get());
+        /*else {
             chat.get().getUser().add(user);
             ChatEntity response = chatService.addChat(chat.get());
             return new ResponseEntity(ChatMapper.fromChatEntityToChatResponse(response),HttpStatus.OK);
-        }
+        }*/
+        return new ResponseEntity(ChatMapper.fromChatEntityToChatResponse(response),HttpStatus.OK);
     }
 }

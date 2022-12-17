@@ -18,8 +18,8 @@ public class RabbitMqAdmin {
 
     public void createQueue(String chatId, String userId) {
         String queueName = chatId + "/" + userId;
-        Queue queue = new Queue(queueName, true, false, true);
-        Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, MAIN_EXCHANGE, chatId, null);
+        Queue queue = new Queue(queueName, true, false, false);
+        Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, MAIN_EXCHANGE, queueName, null);
         admin.declareQueue(queue);
         admin.declareBinding(binding);
         log.info("Queue created for: " + chatId + "/" + userId);

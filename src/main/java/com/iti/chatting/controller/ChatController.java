@@ -31,7 +31,7 @@ public class ChatController {
     }
 
     @PostMapping("/chats/{chatid}/user/{userid}")
-    public ResponseEntity addUserToChat(@PathVariable(name = "userid") Long userId, @PathVariable(name = "chatid") Long chatID){
+    public ResponseEntity addUserToChat(@PathVariable(name = "userid") String userId, @PathVariable(name = "chatid") String chatID){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatID);
         if(!chat.isPresent()) return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);

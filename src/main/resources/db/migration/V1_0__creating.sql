@@ -1,6 +1,6 @@
 CREATE TABLE users
 (
-    user_id bigint,
+    user_id VARCHAR(255),
     user_login VARCHAR(255),
     user_password CHAR(64),
     user_email VARCHAR(400),
@@ -10,27 +10,27 @@ create table hibernate_sequence (next_val bigint);
 insert into hibernate_sequence values ( 1 );
 CREATE TABLE message
 (
-    message_id bigint,
+    message_id VARCHAR(255),
     message_datetime DATETIME,
     message_text TEXT,
-    message_chat_id bigint,
-    message_user_id bigint,
+    message_chat_id VARCHAR(255),
+    message_user_id VARCHAR(255),
     PRIMARY KEY (message_id)
 );
 
 CREATE TABLE user_chat
 (
-    user_chat_chat_id bigint,
-    user_chat_user_id bigint,
+    user_chat_chat_id VARCHAR(255),
+    user_chat_user_id VARCHAR(255),
     PRIMARY KEY (user_chat_chat_id,user_chat_user_id)
 );
 
 CREATE TABLE chat
 (
-    chat_id bigint,
+    chat_id VARCHAR(255),
     chat_topic VARCHAR(32),
     chat_password CHAR(64),
-    user_chat_user_id bigint,
+    user_chat_user_id VARCHAR(255),
     PRIMARY KEY (chat_id)
 );
 

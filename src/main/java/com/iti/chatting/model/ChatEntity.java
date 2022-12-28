@@ -1,6 +1,7 @@
 package com.iti.chatting.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,8 +13,9 @@ public class ChatEntity {
 
     @Id
     @Column(name = "chat_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Column(name = "chat_topic",length = 32)
     private String topic;

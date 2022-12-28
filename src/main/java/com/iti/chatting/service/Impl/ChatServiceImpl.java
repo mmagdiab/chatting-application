@@ -30,7 +30,7 @@ public class ChatServiceImpl {
     public void removeAll(){
         chatRepository.deleteAll();
     }
-    public Optional<ChatEntity> findByID(Long id){
+    public Optional<ChatEntity> findByID(String id){
         return chatRepository.findById(id);
     }
 

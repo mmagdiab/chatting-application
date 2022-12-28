@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity findByID(Long userId) {
+    public UserEntity findByID(String userId) {
         if (userRepository.existsById(userId)) {
             return userRepository.findById(userId).get();
         }

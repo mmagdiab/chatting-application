@@ -9,5 +9,5 @@ public interface UserService extends UserDetailsService {
     public UserEntity addUser(UserEntity userEntity);
     public UserEntity updateUser(UserEntity userEntity);
 
-    UserEntity findByID(Long userId);
+    UserEntity findByID(String userId);
 }

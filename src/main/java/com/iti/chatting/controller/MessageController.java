@@ -27,7 +27,7 @@ public class MessageController {
 
 
     @PostMapping("/messages")
-    public ResponseEntity addMessageByUserToChat(@RequestBody MessageRequestDto requestDto, Long userId, Long chatId){
+    public ResponseEntity addMessageByUserToChat(@RequestBody MessageRequestDto requestDto, String userId, String chatId){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatId);
         if(!chat.isPresent()) return new ResponseEntity(null, HttpStatus.NOT_FOUND);

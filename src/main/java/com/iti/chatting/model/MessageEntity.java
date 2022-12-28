@@ -1,6 +1,7 @@
 package com.iti.chatting.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -9,8 +10,9 @@ import java.time.LocalDate;
 @Data
 public class MessageEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private String id;
 
     @Column(name = "message_datetime")
     private LocalDate messageTime;

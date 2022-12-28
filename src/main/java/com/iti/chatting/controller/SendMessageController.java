@@ -19,9 +19,8 @@ public class SendMessageController {
 
     @PostMapping("/send")
     public String sendMessage(@RequestParam String message,
-                              @RequestParam String chatId,
-                              @RequestParam String toUserId) {
-        String routingKey = chatId + "/" + toUserId;
+                              @RequestParam String chatId) {
+        String routingKey = chatId;
         rabbitTemplate.convertAndSend(MAIN_EXCHANGE,
                 routingKey, message);
         return "Message Sent Successfully";

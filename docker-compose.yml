@@ -1,0 +1,25 @@
+version: "3"
+
+networks:
+  default:
+
+
+services:
+  db:
+    image: mysql:latest
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./.data/db:/var/lib/mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chatting
+  rabbitmq:
+    container_name: rabbitmq-container
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - "./.rabbitmq_data:/data"

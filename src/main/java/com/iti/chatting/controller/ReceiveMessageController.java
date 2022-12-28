@@ -15,7 +15,9 @@ public class ReceiveMessageController {
     }
 
     @GetMapping("/receive")
-    public String receiveMessage(@RequestParam String userName) {
-        return (String) rabbitTemplate.receiveAndConvert(userName + "Queue", String.class.getModifiers());
+    public String receiveMessage(@RequestParam String chatId,
+                                 @RequestParam String userId) {
+        String queueName = chatId + "/" + userId;
+        return (String) rabbitTemplate.receiveAndConvert(queueName, String.class.getModifiers());
     }
 }

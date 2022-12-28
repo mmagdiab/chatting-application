@@ -22,8 +22,7 @@ public class UserServiceImpl implements UserService {
 
     private BCryptPasswordEncoder bcryptPasswordEncoder;
 
-    @Autowired
-    private RabbitMqAdmin rabbitMqAdmin;
+
 
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
         this.userRepository = userRepository;
@@ -36,7 +35,7 @@ public class UserServiceImpl implements UserService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters not provided correctly!");
 
         userEntity.setPassword(bcryptPasswordEncoder.encode(userEntity.getPassword()));
-        rabbitMqAdmin.createUserQueue(userEntity.getUsername());
+        // rabbitMqAdmin.createUserQueue(userEntity.getUsername());
         return userRepository.save(userEntity);
     }
 

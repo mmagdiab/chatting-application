@@ -15,15 +15,13 @@ import static com.iti.chatting.ChattingApplication.MAIN_EXCHANGE;
 public class RabbitMqAdmin {
     @Autowired
     private AmqpAdmin admin;
-    private final String ROUTING_KEY_GROUP = "group";
-    public void createUserQueue(String userName) {
-        String queueName = userName + "Queue";
+
+    public void createQueue(String chatId, String userId) {
+        String queueName = chatId + "/" + userId;
         Queue queue = new Queue(queueName, true, false, false);
-        Binding binding_group = new Binding(queueName, Binding.DestinationType.QUEUE, MAIN_EXCHANGE, ROUTING_KEY_GROUP, null);
-        Binding binding_private = new Binding(queueName, Binding.DestinationType.QUEUE, MAIN_EXCHANGE, userName, null);
+        Binding binding = new Binding(queueName, Binding.DestinationType.QUEUE, MAIN_EXCHANGE, queueName, null);
         admin.declareQueue(queue);
-        admin.declareBinding(binding_group);
-        admin.declareBinding(binding_private);
-        log.info("Queue created for user: " + userName);
+        admin.declareBinding(binding);
+        log.info("Queue created for: " + chatId + "/" + userId);
     }
 }

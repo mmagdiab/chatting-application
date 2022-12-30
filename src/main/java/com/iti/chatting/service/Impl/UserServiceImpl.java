@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,10 +65,11 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User " + username + " Not found");
 
 
-        return new org.springframework.security.core.userdetails.User(userEntity.getUsername(),
-                userEntity.getPassword(),
-                mapToGrantedAuthorities());
+
+        return userEntity;
     }
+
+
 
     private static List<GrantedAuthority> mapToGrantedAuthorities() {
         List<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();

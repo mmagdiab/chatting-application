@@ -18,6 +18,7 @@ public class ReceiveMessageController {
     public String receiveMessage(@RequestParam String chatId,
                                  @RequestParam String userId) {
         String queueName = chatId + "/" + userId;
-        return (String) rabbitTemplate.receiveAndConvert(queueName, String.class.getModifiers());
+        return rabbitTemplate.receive(queueName).toString();
+        // (String) rabbitTemplate.receiveAndConvert(queueName, String.class.getModifiers());
     }
 }

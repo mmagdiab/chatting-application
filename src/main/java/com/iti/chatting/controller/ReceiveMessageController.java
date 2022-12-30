@@ -1,8 +1,9 @@
 package com.iti.chatting.controller;
 
+import com.iti.chatting.model.UserEntity;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +16,10 @@ public class ReceiveMessageController {
     }
 
     @GetMapping("/receive")
-    public String receiveMessage(@RequestParam String chatId,
-                                 @RequestParam String userId) {
-        String queueName = chatId + "/" + userId;
+    public String receiveMessageFromChat(@RequestParam String chatId,
+                                         Authentication authentication) {
+        String user_id = ((UserEntity)authentication.getPrincipal()).getId();
+        String queueName = chatId + "/" + user_id;
         return rabbitTemplate.receive(queueName).toString();
         // (String) rabbitTemplate.receiveAndConvert(queueName, String.class.getModifiers());
     }

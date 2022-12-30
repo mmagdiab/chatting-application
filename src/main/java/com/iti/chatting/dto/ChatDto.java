@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ChatResponseDto {
+public class ChatDto {
     private String topic;
     private String password;
 }

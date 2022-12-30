@@ -27,12 +27,12 @@ public class MessageController {
 
 
     @PostMapping("/messages")
-    public ResponseEntity addMessageByUserToChat(@RequestBody MessageRequestDto requestDto, String userId, String chatId){
+    public ResponseEntity addMessageByUserToChat(@RequestBody MessageRequestDto messageRequestDto, String userId, String chatId){
         UserEntity user = userService.findByID(userId);
         Optional<ChatEntity> chat = chatService.findByID(chatId);
         if(!chat.isPresent()) return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         else{
-            MessageEntity message = MessageMapper.fromMessageRequestToMessageEntity(requestDto);
+            MessageEntity message = MessageMapper.INSTANCE.MessageRequestDtoToMessage(messageRequestDto);
             ChatEntity chatEntity = chat.get();
             message.setChat(chatEntity);
             message.setUser(user);

@@ -3,18 +3,14 @@ package com.iti.chatting.Mapper;
 import com.iti.chatting.dto.UserRequestDto;
 import com.iti.chatting.dto.UserResponseDto;
 import com.iti.chatting.model.UserEntity;
+import org.mapstruct.Mapper;
+import org.mapstruct.control.MappingControl;
+import org.mapstruct.factory.Mappers;
 
-public class UserMapper {
+@Mapper
+public interface UserMapper {
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    public static UserEntity fromUserRequestToUserEntity(UserRequestDto requestDto){
-        UserEntity entity = new UserEntity();
-        entity.setUsername(requestDto.getName());
-        entity.setPassword(requestDto.getPassword());
-        return entity;
-    }
-
-    public static UserResponseDto fromUserEntityToUserResponse(UserEntity entity){
-        return UserResponseDto.builder().name(entity.getUsername()).build();
-    }
-
+    UserEntity UserRequestDtoToUser(UserRequestDto userRequestDto);
+    UserResponseDto UserToUserResponseDto(UserEntity UserEntity);
 }

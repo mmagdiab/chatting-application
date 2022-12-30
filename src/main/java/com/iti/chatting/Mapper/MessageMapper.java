@@ -3,16 +3,13 @@ package com.iti.chatting.Mapper;
 import com.iti.chatting.dto.MessageRequestDto;
 import com.iti.chatting.dto.MessageResponseDto;
 import com.iti.chatting.model.MessageEntity;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-public class MessageMapper {
+@Mapper
+public interface MessageMapper {
+    MessageMapper INSTANCE = Mappers.getMapper(MessageMapper.class);
 
-    public static MessageEntity fromMessageRequestToMessageEntity(MessageRequestDto requestDto){
-        MessageEntity entity = new MessageEntity();
-        entity.setText(requestDto.getText());
-        return entity;
-    }
-
-    public static MessageResponseDto fromMessageEntityToMessageResponse(MessageEntity entity){
-        return MessageResponseDto.builder().chatTopic(entity.getChat().getTopic()).userName(entity.getUser().getUsername()).text(entity.getText()).build();
-    }
+    MessageEntity MessageRequestDtoToMessage(MessageRequestDto messageRequestDtoDto);
+    MessageResponseDto MessageToMessageResponseDto(MessageEntity messageEntity);
 }

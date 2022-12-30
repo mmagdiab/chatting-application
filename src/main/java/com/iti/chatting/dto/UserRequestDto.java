@@ -11,9 +11,11 @@ import javax.validation.constraints.Size;
 public class UserRequestDto {
     @Size(min = 5,message = "User name must be at least 5 characters")
     @NotNull(message = "username cannot be null")
-    private String name;
+    private String username;
 
     private String password;
 
-
+    public String getPassword() {
+        return password;
+    }
 }

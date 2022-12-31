@@ -8,8 +8,11 @@ import com.iti.chatting.service.Impl.ChatServiceImpl;
 import com.iti.chatting.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +31,14 @@ public class ChatController {
     public ResponseEntity addChat(@RequestBody ChatDto requestDto){
         return new ResponseEntity(ChatMapper.INSTANCE.ChatToChatDto(chatService.addChat(ChatMapper.INSTANCE.ChatDtoToChat(requestDto))), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/chats")
+    public ModelAndView chats(Model model) {
+        List<ChatEntity> chats = chatService.findAll();
+        model.addAttribute("chats", chats);
+        ModelAndView mav = new ModelAndView("/chats");
+        return mav;
     }
 
     @PostMapping("/chats/{chatid}/user/{userid}")

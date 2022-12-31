@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Chat Topic</th>
+                <th>Some other data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="chat : ${chats}">
+                <td th:text="${chat.getTopic()}"></td>
+                <td th:text="${chat.getId()}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

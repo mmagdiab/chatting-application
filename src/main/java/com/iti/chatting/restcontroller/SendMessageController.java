@@ -1,4 +1,4 @@
-package com.iti.chatting.controller;
+package com.iti.chatting.restcontroller;
 
 import com.iti.chatting.model.UserEntity;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

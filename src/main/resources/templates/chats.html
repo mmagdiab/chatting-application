@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
     <title>Title</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Chat Topic</th>
-                <th>Some other data</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="chat : ${chats}">
-                <td th:text="${chat.getTopic()}"></td>
-                <td th:text="${chat.getId()}"></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="w-25">
+    <ul class="list-group ">
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            th:each="chat : ${chats}">
+            <th:block th:text="${chat.getTopic()}"></th:block>
+            <span class="badge bg-primary rounded-pill">
+                    Join Chat
+                </span>
+        </li>
+    </ul>
+    <form action="/ui/chats" method="post" >
+        <div class="input-group mb-3 mt-1">
+            <input type="text" class="form-control" name="topic" placeholder="New Room" aria-describedby="button-addon2">
+            <input class="btn btn-outline-secondary" type="submit" id="button-addon2"/>
+        </div>
+    </form>
 
+</div>
 </body>
 </html>

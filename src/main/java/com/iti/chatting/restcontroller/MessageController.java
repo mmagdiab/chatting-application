@@ -1,4 +1,4 @@
-package com.iti.chatting.controller;
+package com.iti.chatting.restcontroller;
 
 import com.iti.chatting.Mapper.MessageMapper;
 import com.iti.chatting.dto.MessageRequestDto;

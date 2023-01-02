@@ -12,14 +12,14 @@
             th:each="chat : ${chats}">
             <th:block th:text="${chat.getTopic()}"></th:block>
             <span class="badge bg-primary rounded-pill">
-                    Join Chat
+                    <a th:href="@{'/ui/chat/' + ${chat.getId()}}" />Enter Chat</a>
                 </span>
         </li>
     </ul>
-    <form action="/ui/chats" method="post" >
+    <form action="/ui/chats" method="post">
         <div class="input-group mb-3 mt-1">
-            <input type="text" class="form-control" name="topic" placeholder="New Room" aria-describedby="button-addon2">
-            <input class="btn btn-outline-secondary" type="submit" id="button-addon2"/>
+            <input type="text" class="form-control" th:name="topic"  required placeholder="New Room" aria-describedby="button-addon2">
+            <input class="btn btn-outline-secondary" type="submit" id="button-addon2" />
         </div>
     </form>
 

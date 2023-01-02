@@ -95,4 +95,9 @@ public class UserEntity implements UserDetails {
     public void setMessages(List<MessageEntity> messages) {
         this.messages = messages;
     }
+
+    @Override
+    public String toString() {
+        return  username;
+    }
 }

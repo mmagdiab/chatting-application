@@ -8,10 +8,12 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Table(name = "message")
 public class MessageEntity {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name = "message_id")
     private String id;
 
     @Column(name = "message_datetime")
@@ -21,10 +23,12 @@ public class MessageEntity {
     private String text;
 
     @ManyToOne
+    @JoinColumn(name = "message_user_id")
     private UserEntity user;
 
 
     @ManyToOne
+    @JoinColumn(name = "message_chat_id")
     private ChatEntity chat;
 
 

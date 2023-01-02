@@ -30,4 +30,6 @@ public class ChatEntity {
     @OneToMany(mappedBy = "chat")
     private List<MessageEntity> messages;
 
+
+
 }

@@ -8,5 +8,5 @@ import lombok.Data;
 @Builder
 public class ChatDto {
     private String topic;
-   // private String password;
+    // private String password;
 }

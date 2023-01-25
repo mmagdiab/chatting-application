@@ -28,9 +28,7 @@ public class RegistrationController {
     public String registerUser(@ModelAttribute UserEntity user, Model model) {
         boolean isSuccess = userService.saveUser(user) != null;
         if (isSuccess) {
-            model.addAttribute("success", "Registration Successful!");
-            model.addAttribute("user", new UserEntity());
-            return "register";
+            return "login";
         } else {
             model.addAttribute("error", "Registration Unsuccessful!");
             model.addAttribute("user", new UserEntity());

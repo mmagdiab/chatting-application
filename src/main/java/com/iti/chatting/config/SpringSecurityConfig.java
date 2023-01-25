@@ -35,9 +35,13 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .formLogin()
                     .loginPage("/ui/login")
+                    .permitAll()
                     .defaultSuccessUrl("/ui/home")
-                    .permitAll();
-        ;
+                .and()
+                    .logout()
+                    .permitAll()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/ui/login");
     }
 
     @Override

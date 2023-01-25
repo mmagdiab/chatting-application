@@ -27,6 +27,9 @@
         <div th:if="${param.error}" class="alert alert-danger">
           Invalid username or password.
         </div>
+        <div>
+          New? <a th:href="@{/ui/register}">Create your account</a>
+        </div>
       </form>
     </div>
   </div>

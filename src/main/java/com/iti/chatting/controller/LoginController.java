@@ -1,5 +1,6 @@
 package com.iti.chatting.controller;
 
+import com.iti.chatting.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,6 +34,7 @@ public class LoginController {
                     new UsernamePasswordAuthenticationToken(username, password)
             );
             SecurityContextHolder.getContext().setAuthentication(auth);
+
             return "login";
         } catch (AuthenticationException e) {
             model.addAttribute("error", "Invalid username or password");

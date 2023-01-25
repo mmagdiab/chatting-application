@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">Registration</h1>
+    <form action="#" th:action="@{/ui/register}" th:object="${user}" method="post" class="mt-5">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" th:field="*{username}">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </form>
+    <div class="text-danger" th:if="${error}">
+        <p th:text="${error}"></p>
+    </div>
+    <div class="text-success" th:if="${success}">
+        <p th:text="${success}"></p>
+    </div>
+</div>
+</body>
+</html>

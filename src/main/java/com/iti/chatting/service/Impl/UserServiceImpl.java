@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity addUser(UserEntity userEntity) {
+    public UserEntity saveUser(UserEntity userEntity) {
         if (userEntity == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Parameters not provided correctly!");
 

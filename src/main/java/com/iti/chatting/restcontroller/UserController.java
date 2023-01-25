@@ -26,7 +26,7 @@ public class UserController {
     public ResponseEntity addUser(@RequestBody @Valid UserRequestDto userRequestDto) {
         return ResponseEntity.ok().body(
                 UserMapper.INSTANCE.UserToUserResponseDto(
-                        userService.addUser(UserMapper.INSTANCE.UserRequestDtoToUser(userRequestDto)
+                        userService.saveUser(UserMapper.INSTANCE.UserRequestDtoToUser(userRequestDto)
                         )
                 )
         );

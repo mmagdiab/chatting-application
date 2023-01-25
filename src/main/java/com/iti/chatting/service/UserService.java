@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService extends UserDetailsService {
-    public UserEntity addUser(UserEntity userEntity);
+    public UserEntity saveUser(UserEntity userEntity);
     public UserEntity updateUser(UserEntity userEntity);
 
     UserEntity findByID(String userId);

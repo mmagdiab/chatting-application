@@ -14,7 +14,7 @@
     <name>chatting</name>
     <description>chatting</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>19</java.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.24</org.projectlombok.version>
     </properties>

@@ -35,7 +35,7 @@ public class LoginController {
             );
             SecurityContextHolder.getContext().setAuthentication(auth);
 
-            return "login";
+            return "home";
         } catch (AuthenticationException e) {
             model.addAttribute("error", "Invalid username or password");
             return "login";

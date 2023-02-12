@@ -22,8 +22,8 @@
     <tr th:each="room : ${rooms}">
       <td th:text="${room.topic}"></td>
       <td>
-        <form th:action="@{/ui/rooms/join}" th:object="${room}" method="post">
-<!--          <input type="hidden" th:field="*{topic}" />-->
+        <form th:action="@{/ui/rooms/join}" method="post">
+          <input type="hidden" name="roomId" th:value="*{room.id}" />
           <button type="submit" class="btn btn-primary">Join</button>
         </form>
       </td>

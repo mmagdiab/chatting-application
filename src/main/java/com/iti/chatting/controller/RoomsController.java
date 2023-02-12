@@ -3,14 +3,14 @@ package com.iti.chatting.controller;
 import com.iti.chatting.Mapper.ChatMapper;
 import com.iti.chatting.dto.ChatDto;
 import com.iti.chatting.model.ChatEntity;
+import com.iti.chatting.model.UserEntity;
 import com.iti.chatting.service.Impl.ChatServiceImpl;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -32,5 +32,11 @@ public class RoomsController {
         chatService.addChat(newRoom);
         return "redirect:/ui/rooms";
     }
-    // TODO: ADD Join room
+    @PostMapping("/rooms/join")
+    public String joinRoom(@RequestParam String roomId, Authentication authentication) {
+        UserEntity user = ((UserEntity) authentication.getPrincipal());
+        ChatEntity chat = chatService.findByID(roomId).get();
+        chatService.addUserToChat(user, chat);
+        return "redirect:/ui/rooms";
+    }
 }

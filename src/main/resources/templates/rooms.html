@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Chatting Rooms</title>
+</head>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div class="container mt-5">
+  <h2 class="text-center">Chatting Rooms</h2>
+  <table class="table mt-5">
+    <thead>
+    <tr>
+      <th>Room Name</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="room : ${rooms}">
+      <td th:text="${room.topic}"></td>
+      <td>
+        <form th:action="@{/ui/rooms/join}" method="post">
+          <input type="hidden" name="roomId" th:value="*{room.id}" />
+          <button type="submit" class="btn btn-primary">Join</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center mt-5">
+    <form th:action="@{/ui/rooms/create}" th:object="${newRoom}" method="post">
+      <input type="text" th:field="*{topic}">
+      <button type="submit" class="btn btn-success">Create</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

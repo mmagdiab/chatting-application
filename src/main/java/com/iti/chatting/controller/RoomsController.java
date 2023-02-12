@@ -37,6 +37,6 @@ public class RoomsController {
         UserEntity user = ((UserEntity) authentication.getPrincipal());
         ChatEntity chat = chatService.findByID(roomId).get();
         chatService.addUserToChat(user, chat);
-        return "redirect:/ui/rooms";
+        return "redirect:/ui/room/" + roomId;
     }
 }

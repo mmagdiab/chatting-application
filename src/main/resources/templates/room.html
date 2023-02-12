@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Chatting Rooms</title>
+</head>
+<body>
+<div th:replace="navbar :: navbar"></div>
+<div class="container mt-5">
+    <h2 class="text-center mb-5">Chat Room - <span th:text="${room.topic}"></span></h2>
+
+    <div class="card">
+        <div class="card-header">
+            Sent Messages
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="message : ${room.messages}">
+                    <td th:text="${message.user.username}"></td>
+                    <td th:text="${message.text}"></td>
+                    <td th:text="${#temporals.format(message.messageTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <form class="mt-5" th:action="@{/ui/rooms/sendMessage}" th:object="${message}" method="post">
+        <input type="hidden" name="roomId" th:value="${room.id}"/>
+        <div class="form-group">
+            <label for="sender">Sender</label>
+            <input type="text" class="form-control" id="sender" name="sender" th:field="*{sender}"/>
+        </div>
+        <div class="form-group">
+            <label for="text">Message</label>
+            <textarea class="form-control" id="text" rows="3" name="text" th:field="*{text}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>
+</body>
+</html>

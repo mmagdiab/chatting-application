@@ -4,6 +4,7 @@ import com.iti.chatting.model.ChatEntity;
 import com.iti.chatting.model.MessageEntity;
 import com.iti.chatting.repository.MessageRepository;
 import com.iti.chatting.service.MessageService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +12,12 @@ import java.util.List;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-    private MessageRepository messageRepository;
+    final private MessageRepository messageRepository;
+    final private RabbitTemplate rabbitTemplate;
 
-
-    public MessageServiceImpl(MessageRepository messageRepository){
+    public MessageServiceImpl(MessageRepository messageRepository, RabbitTemplate rabbitTemplate){
         this.messageRepository = messageRepository;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
     public MessageEntity addMessage(MessageEntity message){
@@ -28,6 +30,14 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public MessageEntity sendMessage(MessageEntity message) {
-        return null;
+        String mainExchange = "mainExchange";
+        String routingKey = message.getChat().getId();
+        String senderUsername = message.getUser().getUsername();
+
+        rabbitTemplate.convertAndSend(mainExchange, routingKey, message.getText(), m -> {
+            m.getMessageProperties().getHeaders().put("sender", senderUsername);
+            return m;
+        });
+        return messageRepository.save(message);
     }
 }

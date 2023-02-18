@@ -37,15 +37,11 @@
         </div>
     </div>
 
-    <form class="mt-5" th:action="@{/ui/rooms/sendMessage}" th:object="${message}" method="post">
+    <form class="mt-5" th:action="@{/ui/room/sendMessage}" method="post">
         <input type="hidden" name="roomId" th:value="${room.id}"/>
         <div class="form-group">
-            <label for="sender">Sender</label>
-            <input type="text" class="form-control" id="sender" name="sender" th:field="*{sender}"/>
-        </div>
-        <div class="form-group">
             <label for="text">Message</label>
-            <textarea class="form-control" id="text" rows="3" name="text" th:field="*{text}"></textarea>
+            <textarea class="form-control" id="text" rows="3" name="messageText"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Send</button>
     </form>

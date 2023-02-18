@@ -14,7 +14,7 @@
     <h2 class="text-center mb-5">Chat Room - <span th:text="${room.topic}"></span></h2>
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" data-room-id="${room.id}">
             Sent Messages
         </div>
         <div class="card-body">
@@ -46,5 +46,6 @@
         <button type="submit" class="btn btn-primary">Send</button>
     </form>
 </div>
+<script src="/js/getNewMessages.js"></script>
 </body>
 </html>

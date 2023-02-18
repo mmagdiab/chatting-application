@@ -40,4 +40,10 @@ public class MessageServiceImpl implements MessageService {
         });
         return messageRepository.save(message);
     }
+
+    @Override
+    public String getMessage(String roomId, String receiverId) {
+        String queueName = roomId + "/" + receiverId;
+        return rabbitTemplate.receive(queueName).toString();
+    }
 }

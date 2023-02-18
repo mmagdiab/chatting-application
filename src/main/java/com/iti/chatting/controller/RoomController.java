@@ -5,7 +5,10 @@ import com.iti.chatting.model.MessageEntity;
 import com.iti.chatting.model.UserEntity;
 import com.iti.chatting.service.Impl.ChatServiceImpl;
 import com.iti.chatting.service.MessageService;
+import org.apache.catalina.security.SecurityUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.context.support.SecurityWebApplicationContextUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/ui/room")
 public class RoomController {
+
     private final ChatServiceImpl chatService;
     private final MessageService messageService;
     public RoomController(ChatServiceImpl chatService, MessageService messageService) {
@@ -44,5 +48,14 @@ public class RoomController {
                 .build();
         messageService.sendMessage(newMessage);
         return "redirect:/ui/room/" + roomId;
+    }
+
+    // TODO: not working, fix
+    @GetMapping("/newMessages")
+    @ResponseBody
+    public String getMessages(@RequestParam String roomId, Authentication authentication) {
+        UserEntity receiver = (UserEntity) authentication.getPrincipal();
+        String receiverId = receiver.getId();
+        return messageService.getMessage(roomId, receiverId);
     }
 }

@@ -44,6 +44,6 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public String getMessage(String roomId, String receiverId) {
         String queueName = roomId + "/" + receiverId;
-        return rabbitTemplate.receive(queueName).toString();
+        return rabbitTemplate.receive(queueName).getBody().toString();
     }
 }

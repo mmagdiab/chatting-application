@@ -13,8 +13,8 @@
 <div class="container mt-5">
     <h2 class="text-center mb-5">Chat Room - <span th:text="${room.topic}"></span></h2>
 
-    <div class="card">
-        <div class="card-header" data-room-id="${room.id}">
+    <div class="card" th:data-room-id="${room.id}">
+        <div class="card-header" >
             Sent Messages
         </div>
         <div class="card-body">

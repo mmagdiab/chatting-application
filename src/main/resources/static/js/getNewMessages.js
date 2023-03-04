@@ -1,5 +1,6 @@
 function getNewMessages() {
-    let roomId = document.querySelector(".card").dataset.roomId;
+    let roomId = document.querySelector(".card").getAttribute("data-room-id");
+    console.log("FETCHING");
     fetch(`/ui/room/newMessages?roomId=${roomId}`)
         .then(response => response.json())
         .then(messages => {
